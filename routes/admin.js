@@ -3,7 +3,7 @@ const express = require("express")
 const router = express.Router()
 //Definindo as rotas
 router.get('/',(req,res)=>{
-    res.send("Página principal")
+    res.render("admin/index")
 })
 router.get('/posts',(req,res)=>{
     res.send("Página de posts")

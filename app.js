@@ -5,6 +5,7 @@ const bodyParser = require('body-parser')
 const app = express()
 const admin = require("./routes/admin.js")
 const public = require('./routes/public.js')
+const path = require('path')
 //Constantes do Programa
 const port = 3000
 //Configurações
@@ -14,7 +15,8 @@ const port = 3000
     //Handlebars
     app.engine('handlebars',handlebars({defaultLayout:'main'}))
     app.set('view engine','handlebars')
-
+    //Arquivos Estaticos
+    app.use(express.static(path.join(__dirname,"public")))
 //Rotas
 app.use('/admin',admin)
 app.use('/',public)
