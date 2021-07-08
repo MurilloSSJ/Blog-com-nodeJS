@@ -9,7 +9,10 @@ router.get('/posts',(req,res)=>{
     res.send("Página de posts")
 })
 router.get('/cartegorias',(req,res)=>{
-    res.send("Página de cartegorias")
+    res.render('admin/cartegorias')
+})
+router.get('/newcartegory',(req,res)=>{
+    res.render('admin/addcartegoria')
 })
 // Exportando as rotas
 module.exports = router
