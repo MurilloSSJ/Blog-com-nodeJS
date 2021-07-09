@@ -1,6 +1,8 @@
 //Importando o Express
 const express = require("express")
 const router = express.Router()
+const mongoose = require('mongoose')
+const model = require('../models/Cartegoria')
 //Definindo as rotas
 router.get('/',(req,res)=>{
     res.render("admin/index")
@@ -13,6 +15,16 @@ router.get('/cartegorias',(req,res)=>{
 })
 router.get('/newcartegory',(req,res)=>{
     res.render('admin/addcartegoria')
+})
+router.post('/addpost',(req,res) =>{
+    const novaCartegoria = {
+        nome: req.body.nomeCartegoria,
+        slug: req.body.slugCartegoria
+    }
+    new model(novaCartegoria).save().then(()=>{
+        console.log("Salvo com sucesso!")
+    })
+    res.redirect('/admin')
 })
 // Exportando as rotas
 module.exports = router
