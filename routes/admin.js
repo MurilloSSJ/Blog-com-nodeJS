@@ -31,15 +31,12 @@ router.post('/addpost',(req,res) =>{
             texto:"Slug Inválido"
         })
     }
-    if(slugCartegoria.trim){
-        erros.push({
-            texto:"Slug não pode ter espaço, utilize o '-'"
-        })
-    }
-    if(slugCartegoria.isUpperCase){
-        erros.push({
-            texto:"Slug não pode ter letra maiuscula"
-        })
+    for(let i=0;i<slugCartegoria.length;i++){
+        if(slugCartegoria[i] == ' '){
+            erros.push({
+                texto:"Slug não pode ter espaço, utilize o '-'"
+            })
+        }
     }
     if(erros.length >0){
         res.render('admin/addcartegoria',{erros: erros})
@@ -51,11 +48,13 @@ router.post('/addpost',(req,res) =>{
             slug: req.body.slugCartegoria
         }
         new model(novaCartegoria).save().then(()=>{
-            console.log("Salvo com sucesso!")
+            req.flash("successMSG","Cartegoria registrada com sucesso")
+            res.redirect('/admin/cartegorias')
+        }).catch((err)=>{
+            req.flash("errorMSG","Ocorreu um erro, tente novamente mais tarde!")
+            res.redirect('/admin/cartegorias')
         })
-        res.redirect('/admin')
     }
-
 })
 // Exportando as rotas
 module.exports = router
