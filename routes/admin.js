@@ -17,6 +17,9 @@ router.get('/newcartegory',(req,res)=>{
     res.render('admin/addcartegoria')
 })
 router.post('/addpost',(req,res) =>{
+    var erros = []
+
+
     const novaCartegoria = {
         nome: req.body.nomeCartegoria,
         slug: req.body.slugCartegoria
