@@ -1,0 +1,19 @@
+<div style="min-height: 100vh;">
+<div class = "container mt-5 mb-5">
+    <h3>Alterar Cartegoria</h3>
+</div>
+<div class="container card card-body mt-5 mb-5">
+<form action = "/admin/cartegorias/editsuccess" method = "POST">
+    <input type="hidden" name="idCartegoria" value="{{cartegoria._id}}">
+    <div class="mb-3">
+        <label for="nomeCartegoria" class="form-label">Nome da cartegoria</label>
+        <input type="text" class="form-control" id="nomeCartegoria" name = "nomeCartegoria" placeholder = "Titulo da sua cartegoria" value="{{cartegoria.nome}}">
+    </div>
+    <div class="mb-3">
+        <label for="slugCartegoria" class="form-label">slug da cartegoria</label>
+        <input type="text" class="form-control" id="slugCartegoria" name = "slugCartegoria" placeholder = "Slug da sua cartegoria" value="{{cartegoria.slug}}">
+    </div>
+    <button type="submit" class="btn btn-primary">Alterar</button>
+</form>
+</div>
+</div>

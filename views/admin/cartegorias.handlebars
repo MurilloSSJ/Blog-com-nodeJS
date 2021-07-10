@@ -10,10 +10,12 @@
                 <br>
                 <small style="font-size: 12px;">{{Data}}</small>
                 <br>
-                <button class="btn btn-danger">Remover Cartegoria</button>
+                <a href="/admin/cartegorias/remove/{{_id}}"><button class="btn btn-danger mx-2 mt-3">Remover</button></a>
+                <a href="/admin/cartegorias/edit/{{_id}}"><button class="btn btn-warning mx-2 mt-3">Alterar</button></a>
             </div>
         </div>
         {{else}}
+            <h4 class="mt-4">Nenhuma cartegoria Registrada</h4>
         {{/each}}
         <br>
         <a href ="/admin/newcartegory"><button class = "btn btn-success my-5 ml-4">Nova Cartegoria</button></a>
