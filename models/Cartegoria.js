@@ -17,4 +17,3 @@ const Cartegoria = new Schema({
 })
 
 cartegory = mongoose.model("Cartegorias", Cartegoria)
-module.exports = cartegory

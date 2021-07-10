@@ -1,7 +1,21 @@
-<div class = "d-flex flex-column align-items-center pt-4" style="height:100vh;background-image:url('/img/bgFooter.jpg');background-repeat: no-repeat;background-position: center;background-size: cover;">
+<div class = "d-flex flex-column align-items-center pt-4" style="min-height:100vh;background-image:url('/img/bgFooter.jpg');background-repeat: no-repeat;background-position: center;background-size: cover;">
     <div class="container">
         <h2>Lista de Cartegorias</h2>
         <hr>
-        <a href ="/admin/newcartegory"><button class = "btn btn-success">Nova Cartegoria</button></a>
+        {{#each cartegorias}}
+        <div class="card text-white bg-dark my-2 mx-2" style="width: 30%; display:inline-block;">
+            <div class="card-body">
+                <h4>{{nome}}</h4>
+                <small>{{slug}}</small>
+                <br>
+                <small style="font-size: 12px;">{{Data}}</small>
+                <br>
+                <button class="btn btn-danger">Remover Cartegoria</button>
+            </div>
+        </div>
+        {{else}}
+        {{/each}}
+        <br>
+        <a href ="/admin/newcartegory"><button class = "btn btn-success my-5 ml-4">Nova Cartegoria</button></a>
     </div>
 </div>
