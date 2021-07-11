@@ -1,0 +1,23 @@
+<div class = "d-flex flex-column align-items-center pt-4" style="min-height:100vh;background-image:url('/img/bg-posts.jpg');background-repeat: no-repeat;background-position: center;background-size: cover;">
+    <div class="container">
+        <h2 style="color: white;">Lista de Posts</h2>
+        <hr>
+        <br>
+        {{#each posts}}
+        <div class="card text-white bg-dark my-2 mx-2" style="width: 40%; display:inline-block;">
+            <div class="card-body">
+                <h4>{{title}}</h4>
+                <p>{{description}}</p>
+                <small><strong>{{cartegory.nome}}</strong></small>
+                <br>
+                <small>{{date}}</small>
+                <br>
+                <a href="/admin/posts/remove/{{_id}}"><button class="btn btn-danger mx-2 mt-3">Remover</button></a>
+                <a href="/admin/posts/edit/{{_id}}"><button class="btn btn-warning mx-2 mt-3">Editar</button></a>
+            </div>
+        </div>
+        {{/each}}
+        <br>
+        <a href ="/admin/posts/new"><button class = "btn btn-success my-5 ml-4">Novo Post</button></a>
+    </div>
+</div>

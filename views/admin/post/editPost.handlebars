@@ -1,0 +1,39 @@
+{{#each erros}}
+    <div class="alert alert-danger text-center mt-4 mx-auto" style="width: 60%;">{{texto}}</div>
+{{else}}
+{{/each}}
+<div class="container card mt-5 mb-5 text-center" style="min-height: 100vh;">
+    <h3>Editar Post</h3>
+<div class="card-body mx-auto" style="width: 60%;">
+    <form action = "/admin/post/postEdit/{{post._id}}" method = "POST" style="text-align: left !important;">
+    <input type="hidden" value="{{post._id}}" name="ID">
+    <div class="mb-3">
+        <label for="titlePost" class="form-label">titulo do Post</label>
+        <input type="text" class="form-control" id="titlePost" name = "titlePost" placeholder = "Titulo da sua cartegoria" value="{{post.title}}">
+    </div>
+    <div class="mb-3">
+        <label for="slugPost" class="form-label">slug do post</label>
+        <input type="text" class="form-control" id="slugPost" name = "slugPost" placeholder = "Slug da sua cartegoria" value="{{post.slug}}">
+    </div>
+    <div class="mb-3">
+        <label for="descriptionPost" class="form-label">Descrição do post</label>
+        <textarea name="descriptionPost" placeholder="Insira a descrição aqui!" class="form-control">{{post.description}}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="contentPost" class="form-label">Conteúdo do post</label>
+        <textarea name="contentPost" placeholder="Insira o conteúdo aqui!" class="form-control">{{post.content}}</textarea>
+    </div>
+    <div class="mb-3">
+        <label for="cartegoria" class="form-label">Cartegoria</label>
+        <select name="cartegoria" class="form-control">
+            {{#each cartegoria}}
+                <option value="{{_id}}">{{nome}}</option>
+            {{else}}
+                <option value="0">Nenhuma cartegoria Registrada</option>
+            {{/each}}
+        </select>
+    </div>
+    <button type="submit" class="btn btn-primary">Editar</button>
+</form>
+</div>
+</div>
