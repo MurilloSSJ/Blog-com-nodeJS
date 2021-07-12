@@ -1,0 +1,17 @@
+<div class="container mt-5" style="min-height: 100vh;">
+    <h3>Categorias do site</h3>
+    <hr>
+    {{#each cartegoria}}
+        <a href="/cartegoria/{{slug}}"><div class="card text-white bg-dark my-2 mx-2" style="width: 30%; display:inline-block;">
+            <div class="card-body">
+                <h4>{{nome}}</h4>
+                <small>{{slug}}</small>
+                <br>
+                <small style="font-size: 12px;">{{Data}}</small>
+                <br>
+            </div>
+        </div></a>
+        {{else}}
+            <h4 class="mt-4">Nenhuma cartegoria Registrada</h4>
+        {{/each}}
+</div>

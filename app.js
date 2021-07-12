@@ -6,9 +6,12 @@
     const admin = require("./routes/admin.js")
     const public = require('./routes/public.js')
     const path = require('path')
+    const login = require('./routes/authenticated')
     const mongoose = require('mongoose')
     const session = require("express-session")
     const flash = require('connect-flash')
+    const passport = require("passport")
+    require('./config/auth')(passport)
 //Constantes do Programa
     const port = 3000
 //Configurações
@@ -18,12 +21,17 @@
             resave: true,
             saveUninitialized: true
         }))
+
+        app.use(passport.initialize())
+        app.use(passport.session())
         app.use(flash())
     //Middleware
         app.use((req,res,next)=>{
             //Declaração das variaveis globais
             res.locals.successMSG = req.flash("successMSG")
             res.locals.errorMSG = req.flash('errorMSG')
+            res.locals.error = req.flash('error')
+            res.locals.user = req.user || null
             next()
         })
     //Body Parser
@@ -44,6 +52,7 @@
 //Rotas
     app.use('/admin',admin)
     app.use('/',public)
+    app.use('/users',login)
 
 //Outros
     app.listen(port,()=>{

@@ -1,7 +1,9 @@
 {{#if successMSG}}
-    <div class="alert alert-success alert-dismissible position-absolute text-center mx-auto" style="width: 60%;">{{successMSG}}</div>
+    <div class="alert alert-success alert-dismissible position-absolute text-center mx-auto container" style="width: 100%;">{{successMSG}}</div>
 {{/if}}
-
+{{#if error}}
+    <div class="alert alert-danger alert-dismissible text-center mx-auto position-absolute container" style="width: 100%;">{{error}}</div>
+{{/if}}
 {{#if errorMSG}}
-    <div class="alert alert-danger alert-dismissible position-absolute text-center mx-auto" style="width: 60%;">{{errorMSG}}</div>
+    <div class="alert alert-danger alert-dismissible position-absolute text-center mx-auto container position-absolute" style="width: 100%;">{{errorMSG}}</div>
 {{/if}}

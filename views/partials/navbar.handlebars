@@ -12,11 +12,15 @@
           <a class="nav-link" href="/admin/posts">Posts</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/admin/cartegorias">Cartegorias</a>
+          <a class="nav-link" href="/cartegorias">Cartegorias</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Login</a>
-        </li>
+        {{#if user}}
+
+        {{else}}
+          <li class="nav-item">
+            <a class="nav-link" href="/users/login">Login</a>
+          </li>
+        {{/if}}
       </ul>
     </div>
   </div>

@@ -1,5 +1,5 @@
 //Funções de validação
-function validandoFormularioCartegoria(nomeCartegoria,slugCartegoria){
+function validandoFormularioCartegoria(nomeCartegoria,slugCartegoria,cartegoria){
     var erros = []
     if(!nomeCartegoria){
         erros.push({
@@ -10,6 +10,15 @@ function validandoFormularioCartegoria(nomeCartegoria,slugCartegoria){
         erros.push({
             texto:"Slug Inválido"
         })
+    }else{
+        cartegoria.findOne({slug:slugCartegoria}).then((cartegoria)=>{
+            if(cartegoria){
+                erros.push({
+                    texto:"slug já cadastrado!"
+                })
+            }
+        })
+
     }
     var j=0
     for(let i=0;i<slugCartegoria.length;i++){
@@ -22,7 +31,7 @@ function validandoFormularioCartegoria(nomeCartegoria,slugCartegoria){
     }
     return erros;
 }
-function validandoPost(titlePost,slugPost,descriptionPost,conteudoPost){
+function validandoPost(titlePost,slugPost,descriptionPost,conteudoPost,post){
     var erros = []
     if(!titlePost){
         erros.push({
@@ -32,6 +41,14 @@ function validandoPost(titlePost,slugPost,descriptionPost,conteudoPost){
     if(!slugPost){
         erros.push({
             texto:"Slug Inválido"
+        })
+    }else{
+        post.findOne({slug:slugPost}).then((post)=>{
+            if(post){
+                erros.push({
+                    texto:"Slug já registrado"
+                })
+            }
         })
     }
     var j=0
@@ -64,11 +81,15 @@ require('../models/Cartegoria')
 require('../models/Posts')
 const post = mongoose.model("postagens")
 const Cartegoria = mongoose.model("Cartegorias")
+const {isAdmin} = require('../helpers/isAdmin')
+
+
+
 //Definindo as rotas
-router.get('/',(req,res)=>{
+router.get('/',isAdmin,(req,res)=>{
     res.render("admin/index")
 })
-router.get('/cartegorias',(req,res)=>{
+router.get('/cartegorias',isAdmin,(req,res)=>{
     Cartegoria.find().sort({Data:'desc'}).lean().then((cartegorias) =>{
         res.render('admin/cartegorias/cartegorias',{cartegorias : cartegorias})
     }).catch((err)=>{
@@ -76,17 +97,17 @@ router.get('/cartegorias',(req,res)=>{
     })
 })
 
-router.get('/newcartegory',(req,res)=>{
+router.get('/newcartegory',isAdmin,(req,res)=>{
     res.render('admin/cartegorias/addcartegoria')
 })
 
 //Adicionando, removendo e alterando cartegorias
     //Adicionando Nova Cartegoria
-router.post('/addcartegory',(req,res) =>{
+router.post('/addcartegory',isAdmin,(req,res) =>{
     //Validando Formulario
     var nomeCartegoria = req.body.nomeCartegoria
     var slugCartegoria = req.body.slugCartegoria
-    var erros = validandoFormularioCartegoria(nomeCartegoria,slugCartegoria)
+    var erros = validandoFormularioCartegoria(nomeCartegoria,slugCartegoria,Cartegoria)
     if(erros.length >0){
         res.render('admin/cartegorias/addcartegoria',{erros: erros})
     }
@@ -106,7 +127,7 @@ router.post('/addcartegory',(req,res) =>{
     }
 })
 //Editando Cartegoria
-router.get('/cartegorias/edit/:id',(req,res)=>{
+router.get('/cartegorias/edit/:id',isAdmin,(req,res)=>{
     Cartegoria.findOne({_id:req.params.id}).lean().then((cartegoria)=>{
         res.render('admin/cartegorias/editarCartegoria',{cartegoria:cartegoria})
     }).catch((err)=>{
@@ -114,7 +135,7 @@ router.get('/cartegorias/edit/:id',(req,res)=>{
         res.redirect('/admin/cartegorias')
     })
 })
-router.post('/cartegorias/editsuccess',(req,res)=>{
+router.post('/cartegorias/editsuccess',isAdmin,(req,res)=>{
     var nomeCartegoria = req.body.nomeCartegoria
     var slugCartegoria = req.body.slugCartegoria
     var erros = validandoFormularioCartegoria(nomeCartegoria,slugCartegoria)
@@ -140,7 +161,7 @@ router.post('/cartegorias/editsuccess',(req,res)=>{
 })
 
 //Deletando Cartegorias
-router.get('/cartegorias/remove/:id',(req,res)=>{
+router.get('/cartegorias/remove/:id',isAdmin,(req,res)=>{
     Cartegoria.remove({_id: req.params.id}).then(()=>{
         req.flash('successMSG','Arquivo removido com sucesso')
         res.redirect('/admin/cartegorias')
@@ -152,12 +173,12 @@ router.get('/cartegorias/remove/:id',(req,res)=>{
 
 
 //Rotas para os posts
-router.get('/posts',(req,res)=>{
+router.get('/posts',isAdmin,(req,res)=>{
     post.find().populate('cartegory').lean().then((posts)=>{
         res.render('admin/post/posts',{posts:posts})
     })
 })
-router.get('/posts/new',(req,res)=>{
+router.get('/posts/new',isAdmin,(req,res)=>{
     Cartegoria.find().populate('cartegory').lean().then((cartegorias)=>{
         res.render('admin/post/addpost',{cartegorias:cartegorias})
     }).catch((err)=>{
@@ -166,12 +187,12 @@ router.get('/posts/new',(req,res)=>{
     })
 })
 //Adicionando um novo post no banco de dados
-router.post('/post/post-validation',(req,res)=>{
+router.post('/post/post-validation',isAdmin,(req,res)=>{
     var title = req.body.titlePost
     var slug = req.body.slugPost
     var description = req.body.descriptionPost
     var conteudo = req.body.contentPost
-    erros = validandoPost(title,slug,description,conteudo)
+    erros = validandoPost(title,slug,description,conteudo,post)
     if(erros.length > 0){
         Cartegoria.find().lean().then((cartegoria)=>{
             res.render('admin/post/addpost',{erros: erros,cartegoria:cartegoria})
@@ -193,7 +214,7 @@ router.post('/post/post-validation',(req,res)=>{
 
 })
 
-router.get('/posts/edit/:id',(req,res)=>{
+router.get('/posts/edit/:id',isAdmin,(req,res)=>{
     post.findOne({_id:req.params.id}).lean().then((post)=>{
         Cartegoria.find().lean().then((cartegoria)=>{
             res.render('admin/post/editPost',{cartegoria:cartegoria,post:post})
@@ -202,7 +223,7 @@ router.get('/posts/edit/:id',(req,res)=>{
 })
 
 //Alterando um post do DB
-router.post("/post/postEdit/:id",(req,res)=>{
+router.post("/post/postEdit/:id",isAdmin,(req,res)=>{
     var title = req.body.titlePost
     var slug = req.body.slugPost
     var description = req.body.descriptionPost
@@ -233,7 +254,7 @@ router.post("/post/postEdit/:id",(req,res)=>{
 })
 
 //Excluindo um post do DB
-router.get('/posts/remove/:id',(req,res)=>{
+router.get('/posts/remove/:id',isAdmin,(req,res)=>{
     post.remove({_id:req.params.id}).then(()=>{
         req.flash('successMSG','Post Removido com sucesso!')
         res.redirect('/admin/posts')
