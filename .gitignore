@@ -1,2 +1,5 @@
 node_modules
 README.md
+git rm node_modules
+git commit -m "node_modules"
+git push origin main
