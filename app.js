@@ -13,7 +13,8 @@
     const passport = require("passport")
     require('./config/auth')(passport)
 //Constantes do Programa
-    const port = 3000
+    const port = process.env.port || 3000
+    const db = require('./config/db')
 //Configurações
     //Sessão
         app.use(session({
@@ -43,7 +44,7 @@
     //Arquivos Estaticos
         app.use(express.static(path.join(__dirname,"public")))
     //Mongoose
-        mongoose.connect("mongodb://localhost/blog",{
+        mongoose.connect(db.mongoURI,{
             useNewUrlParser: true,
             useUnifiedTopology: true
         }).then(()=>{

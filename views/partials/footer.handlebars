@@ -11,9 +11,9 @@
     </div>
     <div class="p-2 bd-highlight">
         <p class="lead text-break">Social Media</p>
-        <img src="/img/facebook.png" class="rounded float-start"/>
-        <img src="/img/github.png" class="rounded float-middle" />
-        <img src="/img/instagram.png" class="rounded float-end" />
+        <a href="https://www.linkedin.com/in/murillo-santhiago-334b591b5/" class="mx-2"><img src="/img/linkedin.png" class="rounded float-start"/></a>
+        <a href="https://github.com/MurilloSSJ" class="mx-2"><img src="/img/github.png" class="rounded float-middle" /></a>
+        <a href="https://www.instagram.com/murillo_ssj/" class="mx-2"><img src="/img/instagram.png" class="rounded float-end" /></a>
     </div>
     <div class="p-2 bd-highlight">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0 flex-column">
@@ -26,9 +26,13 @@
             <li class="nav-item">
                 <a class="nav-link" href="#" style = "color:white!important">Cartegorias</a>
             </li>
+            {{#if user}}
+
+            {{else}}
             <li class="nav-item">
                 <a class="nav-link" href="#" style = "color:white!important">Login</a>            
             </li>
+            {{/if}}
         </ul>
     </div>
 </div>

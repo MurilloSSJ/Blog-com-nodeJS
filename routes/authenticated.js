@@ -105,4 +105,10 @@ function validaRegistro(email,login,senha,user,confirmpassword){
             })(req, res, next)
         })
 
+    //Rota de logout
+        router.get('/logout',(req,res)=>{
+            req.logout()
+            req.flash('successMSG','Log Out bem sucedido!')
+            res.redirect('/')
+        })
 module.exports = router
