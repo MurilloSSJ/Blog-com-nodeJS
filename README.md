@@ -3,6 +3,11 @@
  em gerar um sistema de gerenciamento de posts e cartegorias, onde temos os usuarios admins, e os
  usuários normais, sendo que para fazer um *CRUD* em cartegorias ou em posts, precisamos ser
  admins.
+ <br/>
+## Acesso
+ Foi feito um deploy do projeto na heroku, e o mesmo pode ser acessado aqui:
+<br/>
+https://polar-gorge-70815.herokuapp.com/
 
  ## Front End
  O front do site foi desenvolvido com um framework chamado handlebars, e com bootstrap, para que
@@ -31,3 +36,7 @@ uma única conta de administrador, e para efeitos de teste, vou disponibilizar a
 *password* : SmkxUZc1p7ziA
 <br/>
 Pode-se criar uma conta normal, porêm *ela não sera de administador*
+<br/>
+Foi feito um deploy do projeto na heroku, e o mesmo pode ser acessado aqui:
+<br/>
+https://polar-gorge-70815.herokuapp.com/
