@@ -20,6 +20,7 @@
   * bcryptjs
   <br/>
 Além disso, o banco de dados utilizado, foi o mongo.
+
 ## Como Funciona?
 Têm-se a parte de usuários, e uma parte exclusiva para administradores, onde os mesmos podem
 fazer o *CRUD* dos posts e cartegorias, enquanto os usuários só tem acesso a leitura, so têm
