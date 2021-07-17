@@ -23,6 +23,8 @@ Além disso, o banco de dados utilizado, foi o mongo.
 Têm-se a parte de usuários, e uma parte exclusiva para administradores, onde os mesmos podem
 fazer o *CRUD* dos posts e cartegorias, enquanto os usuários só tem acesso a leitura, so têm
 uma única conta de administrador, e para efeitos de teste, vou disponibilizar aqui:
+<br/>
 *login* : admin
+
 *password* : SmkxUZc1p7ziA
 Pode-se criar uma conta normal, porêm *ela não sera de administador*
