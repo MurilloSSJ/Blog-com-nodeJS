@@ -18,6 +18,7 @@
   * nodemon
   * Express-session
   * bcryptjs
+  <br/>
 Além disso, o banco de dados utilizado, foi o mongo.
 ## Como Funciona?
 Têm-se a parte de usuários, e uma parte exclusiva para administradores, onde os mesmos podem
@@ -25,6 +26,7 @@ fazer o *CRUD* dos posts e cartegorias, enquanto os usuários só tem acesso a l
 uma única conta de administrador, e para efeitos de teste, vou disponibilizar aqui:
 <br/>
 *login* : admin
-
+<br/>
 *password* : SmkxUZc1p7ziA
+<br/>
 Pode-se criar uma conta normal, porêm *ela não sera de administador*
